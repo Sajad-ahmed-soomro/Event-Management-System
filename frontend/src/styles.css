@@ -139,7 +139,7 @@ html {
 }
 .btn.login:hover {
   transform: scale(1.1); /* Slightly enlarge on hover */
-  box-shadow: 1px 5px 15px rgba(52, 152, 219, 0.6); /* Add a glow effect */
+  box-shadow: 1px 5px 15px #3498db99; /* Add a glow effect */
 }
 
 .btn.signup {

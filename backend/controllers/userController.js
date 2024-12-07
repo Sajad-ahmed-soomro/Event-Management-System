@@ -40,3 +40,29 @@ exports.registerSponsor = async (req, res) => {
     res.status(500).json({ message: "Failed to register sponsor", error });
   }
 };
+exports.loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Match the provided password with the stored hashed password
+    const isPasswordValid = await user.matchPassword(password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // Respond with a token if successful
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token: generateToken(user._id),
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to login", error });
+  }
+};

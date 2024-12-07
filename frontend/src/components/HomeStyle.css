@@ -184,16 +184,16 @@ html {
 /* Keyframes to change the background */
 @keyframes changeBackground {
   0% {
-    background-image: url("./images/Live\ life\ and\ enjoy\ the\ adventure.jpg");
+    background-image: url("../images/Live\ life\ and\ enjoy\ the\ adventure.jpg");
   }
   33% {
-    background-image: url("./images/Bzns_Events_BG.jpg");
+    background-image: url("../images/Bzns_Events_BG.jpg");
   }
   66% {
-    background-image: url("./images/download\ \(1\).jpg");
+    background-image: url("../images/download\ \(1\).jpg");
   }
   100% {
-    background-image: url("./images/You\ Can\ Get\ Tickets\ to\ These\ Summer\ Music\ Festivals\ for\ $99\ Right\ Now.jpg");
+    background-image: url("../images/You\ Can\ Get\ Tickets\ to\ These\ Summer\ Music\ Festivals\ for\ $99\ Right\ Now.jpg");
   }
 }
 

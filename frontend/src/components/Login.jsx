@@ -1,32 +1,35 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Ensure you have routing set up
+import { useNavigate } from "react-router-dom";
 import logo from "../images/webProject_Logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("user"); // Tracks whether the user is a sponsor or not
   const [rememberMe, setRememberMe] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // To display error messages
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate(); // For navigation between routes
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/login",
-        {
-          email,
-          password,
-        }
-      );
+      // Determine payload based on user type
+      const payload = userType === "sponsor" ? { email } : { email, password };
 
+      const response = await axios.post(
+        userType === "sponsor"
+          ? "http://localhost:5000/api/sponsors/login"
+          : "http://localhost:5000/api/users/login",
+        payload
+      );
       if (response.data.success) {
-        alert("Login successful!");
-        // Navigate to the dashboard or homepage after successful login
-        navigate("/dashboard");
+        alert(
+          `Login successful as ${userType === "sponsor" ? "Sponsor" : "User"}!`
+        );
+        navigate("/dashboard"); // Navigate to dashboard after login
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
       }
@@ -62,7 +65,7 @@ const Login = () => {
       <div>
         <div
           style={{ marginLeft: "70%", width: "70%", marginTop: "4%" }}
-          className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg "
+          className="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg"
         >
           <h2 className="text-2xl font-semibold text-center mb-4">Sign in</h2>
           <p className="text-gray-500 text-center mb-6">
@@ -77,12 +80,11 @@ const Login = () => {
           )}
 
           <div className="mb-6">
-            <button
-              className="w-full bg-[#1abc9c] text-white py-2 px-4 rounded-md hover:bg-[#16a085] hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 focus:outline-none"
-              onClick={handleGoogleSignIn}
-            >
-              Sign In With Google
-            </button>
+            <a href="http://localhost:5000/api/auth/google">
+              <button className="w-full bg-[#1abc9c] text-white py-2 px-4 rounded-md hover:bg-[#16a085] hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 focus:outline-none">
+                Sign In With Google
+              </button>
+            </a>
           </div>
 
           <hr className="my-6" />
@@ -104,21 +106,24 @@ const Login = () => {
               />
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700">
-                Password *
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            {/* Conditionally render the password field */}
+            {userType === "user" && (
+              <div className="mb-6">
+                <label htmlFor="password" className="block text-gray-700">
+                  Password *
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            )}
 
             <div className="flex items-center mb-6">
               <input
@@ -131,6 +136,21 @@ const Login = () => {
               <label htmlFor="remember-me" className="ml-2 text-gray-600">
                 Remember me
               </label>
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user-type" className="block text-gray-700">
+                User Type
+              </label>
+              <select
+                id="user-type"
+                value={userType}
+                onChange={(e) => setUserType(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="user">User</option>
+                <option value="sponsor">Sponsor</option>
+              </select>
             </div>
 
             <button

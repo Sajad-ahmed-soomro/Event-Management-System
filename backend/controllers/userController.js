@@ -40,29 +40,46 @@ exports.registerSponsor = async (req, res) => {
     res.status(500).json({ message: "Failed to register sponsor", error });
   }
 };
+const bcrypt = require("bcryptjs"); // Ensure bcrypt is imported
+
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
+    // Check if the email belongs to a sponsor
+    const sponsor = await Sponsor.findOne({ email });
+    if (sponsor) {
+      return res.status(200).json({
+        success: true,
+        message: "Login successful as Sponsor",
+        userType: "sponsor",
+        token: generateToken(sponsor._id),
+      });
+    }
+
+    // Check if the email belongs to a normal user
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
-    // Match the provided password with the stored hashed password
-    const isPasswordValid = await user.matchPassword(password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    // Verify password for normal user
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
-    // Respond with a token if successful
     res.status(200).json({
       success: true,
-      message: "Login successful",
+      message: "Login successful as User",
+      userType: "user",
       token: generateToken(user._id),
     });
   } catch (error) {
-    res.status(500).json({ message: "Failed to login", error });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };

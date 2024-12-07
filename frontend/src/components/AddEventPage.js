@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createEvent } from '../services/eventService';
-import styles from './AddEventPage.module.css'; 
+import styles from '../Styles/AddEventPage.module.css'; 
 
 const AddEventPage = () => {
   const [formData, setFormData] = useState({

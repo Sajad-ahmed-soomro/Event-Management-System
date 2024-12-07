@@ -1,0 +1,98 @@
+.event-management-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  color: #333;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  transition: transform 0.3s;
+}
+
+.event-card:hover {
+  transform: scale(1.05);
+}
+
+.event-card h2 {
+  font-size: 22px;
+  color: #333;
+}
+
+.event-card p {
+  color: #555;
+  margin: 10px 0;
+}
+
+.event-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-icon, .delete-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.edit-icon:hover {
+  color: #0056b3;
+}
+
+.delete-icon {
+  color: #dc3545;
+}
+
+.delete-icon:hover {
+  color: #c82333;
+}
+
+/* Floating Plus Icon */
+.add-event-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #007bff;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.add-event-icon:hover {
+  transform: scale(1.1);
+}
+
+.plus-icon {
+  color: white;
+  font-size: 30px;
+}

@@ -17,10 +17,41 @@ const createEvent = async (req, res) => {
 
     // Find sponsors by their names
     const sponsors = await Sponsor.find({ name: { $in: sponsorsNames } });
-    if (sponsors.length !== sponsorsNames.length) {
-        console.log('error2');
-      return res.status(400).json({ error: 'Some sponsors were not found.' });
+
+    // Create a map to track the found sponsors by name
+    const foundSponsorsMap = sponsors.reduce((map, sponsor) => {
+      // If the sponsor's name already exists in the map, increment its count
+      if (map[sponsor.name]) {
+        map[sponsor.name].push(sponsor._id);
+      } else {
+        map[sponsor.name] = [sponsor._id];
+      }
+      return map;
+    }, {});
+    
+    const missingSponsors = [];
+    
+    // Check for each sponsor name in sponsorsNames if it's found
+    for (let name of sponsorsNames) {
+      if (!foundSponsorsMap[name] || foundSponsorsMap[name].length === 0) {
+        missingSponsors.push(name);
+      } else {
+        // For each sponsor name found, we can pop an ID and assign it
+        foundSponsorsMap[name].pop(); // Remove used ID
+      }
     }
+    
+    // If there are any missing sponsors, return an error
+    if (missingSponsors.length > 0) {
+      console.log(`Sponsors not found: ${missingSponsors.join(', ')}`);
+      return res.status(400).json({
+        error: `Some sponsors were not found: ${missingSponsors.join(', ')}`
+      });
+    }
+    
+    // If all sponsors are found, map the found IDs for further processing
+    const sponsorIds = Object.values(foundSponsorsMap).flat();
+    
 
     // Create the new event
     const newEvent = new Event({
@@ -29,7 +60,7 @@ const createEvent = async (req, res) => {
       date,
       location,
       managerId: manager._id,  // Use the manager's ObjectId
-      sponsors: sponsors.map(sponsor => sponsor._id),  // Use the sponsors' ObjectIds
+      sponsors: sponsorIds,  // Use the sponsors' ObjectIds
     });
 
     await newEvent.save();

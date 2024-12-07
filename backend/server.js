@@ -1,34 +1,23 @@
 const express = require('express');
-<<<<<<< HEAD
-const connectDB = require('./config/db'); // Import the database connection function
+const connectDB = require('./config/db');
+const eventRoutes = require('./routes/eventRoutes');
 require('dotenv').config();
-const eventRoutes = require('./Routes/eventRoutes');
+const cors = require('cors');  // Import CORS package
 
 const app = express();
-const port = process.env.PORT || 5000; // Default to 5000 if PORT is not specified
 
-// Connect to the MongoDB database
+// Connect to database
 connectDB();
 
 // Middleware
-app.use(express.json()); // For parsing application/json
-=======
-const app = express();
-const port = 5000; // You can change this port if needed
->>>>>>> 822a880231444033b513ff17040fef3f9319cc3f
+app.use(cors());  // Enable CORS to allow requests from the frontend
+app.use(express.json());  // Middleware to parse JSON requests
 
-// Basic route for testing
-app.get('/', (req, res) => {
-    res.send('Backend is running!');
-});
-
-<<<<<<< HEAD
 // Routes
-app.use('/api/events', eventRoutes);
+app.use('/api/events', eventRoutes);  // Use eventRoutes for API requests
 
-=======
->>>>>>> 822a880231444033b513ff17040fef3f9319cc3f
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+// Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

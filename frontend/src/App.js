@@ -1,18 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Note the import change
-// import EventManagementPage from './components/EventManagementPage';
-// import AddEventPage from './components/AddEventPage';
-// import EditEventPage from './components/EditEventPage';
-import ManageEvents from './components/ManageEvents';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Import Routes instead of Switch
+import AddEventPage from './components/AddEventPage';
+import EventManagementPage from './components/EventManagementPage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes> {/* Change Switch to Routes */}
-          <Route path="/" element={<ManageEvents />} /> {/* Change component prop to element */}
-        </Routes>
-      </div>
+      <Routes>  {/* Replace Switch with Routes */}
+        <Route path="/add-event" element={<AddEventPage />} />  {/* Use element instead of component */}
+        <Route path="/events" element={<EventManagementPage />} />
+      </Routes>
     </Router>
   );
 }

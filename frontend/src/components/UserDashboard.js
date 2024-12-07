@@ -1,29 +1,15 @@
-// src/components/UserDashboard.js
 import React, { useEffect, useState } from "react";
 
-const UserDashboard = () => {
+function UserDashboard() {
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Fetch user profile from the backend
-    fetch("/api/profile/profile")
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+  const [loading, setLoading] = useState(true);
 
   return (
-    <div className="dashboard-container">
-      <h1>Welcome, {user.name}</h1>
-      <p>You're a regular user! Enjoy your time here.</p>
+    <div>
+      <h1>Welcome,</h1>
+      <p>Your email is:</p>
     </div>
   );
-};
+}
 
 export default UserDashboard;

@@ -11,17 +11,11 @@ router.get(
 // Callback route for Google
 router.get(
   "/google/callback",
-  passport.authenticate("google", { session: false }),
+  passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
     const { user, token } = req.user;
-
+    res.redirect("http://localhost:3000/user-dashboard");
     // Send user data and token as response or redirect
-    res.status(200).json({
-      success: true,
-      message: "Google login successful",
-      user,
-      token,
-    });
   }
 );
 

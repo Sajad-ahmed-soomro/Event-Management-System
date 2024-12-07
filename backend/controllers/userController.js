@@ -83,3 +83,19 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+exports.getUserDashboard = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id); // Assuming req.user is set by `protect`
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      status: user.status,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

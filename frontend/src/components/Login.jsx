@@ -29,7 +29,9 @@ const Login = () => {
         alert(
           `Login successful as ${userType === "sponsor" ? "Sponsor" : "User"}!`
         );
-        navigate("/dashboard"); // Navigate to dashboard after login
+        if (userType === "user")
+          navigate("/user-dashboard"); // Navigate to dashboard after login
+        else navigate("/sponsor-dashboard");
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
       }
@@ -42,10 +44,6 @@ const Login = () => {
         setErrorMessage("Something went wrong. Please try again.");
       }
     }
-  };
-
-  const handleGoogleSignIn = () => {
-    console.log("Google Sign-In");
   };
 
   return (

@@ -9,6 +9,10 @@ import BookingsPage from './components/BookingsPage.js';  // Import BookingsPage
 import BookingDetailsPage from './components/BookingDetailsPage'; 
 import BookingsHistoryPage from './components/BookingsHistoryPage';
 import FeedbackPage from './components/FeedbackPage'; // Feedback Page
+import ManageResourcesPage from './components/ManageResourcesPage';
+import AddStaffPage from './components/AddStaffPage';
+import AddEquipmentPage from './components/AddEquipmentPage';
+import AddVenuePage from './components/AddVenuePage';
 
 function App() {
   return (
@@ -26,6 +30,11 @@ function App() {
         <Route path="/booking/:id" element={<BookingDetailsPage />} /> {/* Booking details by ID */}
         <Route path="/bookings-history/:eventId" element={<BookingsHistoryPage />} />
         <Route path="/feedback/:eventId" element={<FeedbackPage />} />
+        <Route path="/manage-resources/:id" element={<ManageResourcesPage />} /> {/* New Route */}
+        <Route path="/add-staff/:id" element={<AddStaffPage />} />
+        <Route path="/add-equipment/:id" element={<AddEquipmentPage />} />
+        <Route path="/add-venue/:id" element={<AddVenuePage />} />
+
       </Routes>
     </Router>
   );

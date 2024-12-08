@@ -7,6 +7,7 @@ const eventManagerRoutes = require('./routes/managerRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const userRoutes = require('./routes/userRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes'); // <-- Add this
+const resourceRoutes = require('./routes/resourceRoutes');
 
 
 require('dotenv').config();
@@ -29,6 +30,7 @@ app.use('/api/event-manager', eventManagerRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/feedback', feedbackRoutes);  // <-- Add this route
+app.use('/api/resources', resourceRoutes);
 // Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

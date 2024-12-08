@@ -55,7 +55,8 @@ const EventPage = () => {
 
       <div className={styles.actions}>
         <button onClick={() => navigate(`/bookings-history/${id}`)}>View Bookings History</button>
-        <button onClick={() => navigate(`/feedback/${id}`)}>View Feedback</button> {/* New Button */}
+        <button onClick={() => navigate(`/feedback/${id}`)}>View Feedback</button>
+        <button onClick={() => navigate(`/manage-resources/${id}`)}>Manage Resources</button> {/* New Button */}
       </div>
 
       <div className={styles.backButton}>

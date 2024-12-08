@@ -23,12 +23,12 @@ const HomePage = () => {
             </a>
           </li>
           <li>
-            <a href="#book-event">
-              <i className="fas fa-tools"></i>Services
+            <a href="/our-services">
+              <i className="fas fa-tools"></i>Our Services
             </a>
           </li>
           <li>
-            <a href="#about-us">
+            <a href="/about-us">
               <i className="fas fa-info-circle"></i>About Us
             </a>
           </li>
@@ -69,7 +69,12 @@ const HomePage = () => {
             One Window Solution for all. Explore and learn more about what we
             do!
           </p>
-          <button className="btn learn-more">Learn More</button>
+          <button
+            className="btn learn-more"
+            onClick={() => (window.location.href = "/our-services")}
+          >
+            Learn More
+          </button>
         </section>
 
         <section className="welcome-message">

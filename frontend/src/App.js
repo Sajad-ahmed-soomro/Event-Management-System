@@ -5,6 +5,8 @@ import Register from "./components/Register";
 import HomePage from "./components/HomePage";
 import UserDashboard from "./components/UserDashboard";
 import SponsorDashboard from "./components/SponsorDashboard";
+import SponsoredEventsList from "./components/SponsoredEventsList";
+import SponsorEventForm from "./components/SponsorEventForm";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />
         <Route path="/sponsor-dashboard" element={<SponsorDashboard />} />
+        <Route path="/sponsored-events" element={<SponsoredEventsList />} />
+        <Route path="/sponsor-event" element={<SponsorEventForm />} />
         {/* Add other routes here */}
       </Routes>
     </Router>

@@ -1,4 +1,5 @@
 const Sponsor = require("../models/Sponsor");
+const Event = require("../models/Event");
 const generateToken = require("../utils/generateToken");
 
 // Login for sponsors
@@ -23,59 +24,75 @@ exports.loginSponsor = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
-// Get all sponsorship requests
-exports.getSponsorshipRequests = async (req, res) => {
+
+// Add a new sponsored event
+// Add a new sponsored event
+exports.sponsorNewEvent = async (req, res) => {
+  const { sponsorId, eventId, contributionAmount } = req.body;
+
   try {
-    const sponsor = await Sponsor.findById(req.user.id).populate(
-      "sponsoredEvents.eventId"
-    );
-    if (!sponsor) return res.status(404).json({ message: "Sponsor not found" });
-    res.status(200).json(sponsor.sponsoredEvents);
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
-};
+    // Find the sponsor by ID
+    const sponsor = await Sponsor.findById(sponsorId);
+    if (!sponsor) {
+      return res.status(404).json({ message: "Sponsor not found" });
+    }
 
-// Make a payment for sponsorship
-exports.makePayment = async (req, res) => {
-  const { eventId, contributionAmount } = req.body;
-  try {
-    const sponsor = await Sponsor.findById(req.user.id);
-    if (!sponsor) return res.status(404).json({ message: "Sponsor not found" });
+    // Find the event by ID
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
 
-    const event = sponsor.sponsoredEvents.find(
-      (e) => e.eventId.toString() === eventId
-    );
-    if (!event)
-      return res
-        .status(404)
-        .json({ message: "Event not found in sponsorships" });
+    // Add the new event to the sponsor's sponsoredEvents
+    sponsor.sponsoredEvents.push({
+      eventId,
+      contributionAmount,
+      status: "Pending", // Default status
+    });
 
-    event.contributionAmount = contributionAmount;
-    event.status = "Confirmed";
+    // Update the sponsor's totalContributions
     sponsor.totalContributions += contributionAmount;
 
+    // Add the sponsor to the event's sponsors list
+    event.sponsors.push(sponsorId);
+
+    // Save both the sponsor and event
     await sponsor.save();
-    res.status(200).json({ message: "Payment successful", event });
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    await event.save();
+
+    // Make sure to use .populate() or select the fields you want to return if necessary
+    const updatedSponsor = await Sponsor.findById(sponsorId).populate(
+      "sponsoredEvents.eventId"
+    );
+    const updatedEvent = await Event.findById(eventId).populate("sponsors");
+
+    // Send back the updated sponsor and event data in the response
+    res.status(201).json({
+      message: "Event sponsored successfully",
+      sponsor: updatedSponsor, // Include the updated sponsor object
+      event: updatedEvent, // Include the updated event object
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
-// Check pending or refund statuses
-exports.getPaymentStatus = async (req, res) => {
+
+// Get all sponsored events for a sponsor
+exports.getSponsoredEvents = async (req, res) => {
+  const { sponsorId } = req.params;
+
   try {
-    const sponsor = await Sponsor.findById(req.user.id);
-    if (!sponsor) return res.status(404).json({ message: "Sponsor not found" });
-
-    const pendingPayments = sponsor.sponsoredEvents.filter(
-      (e) => e.status === "Pending"
+    const sponsor = await Sponsor.findById(sponsorId).populate(
+      "sponsoredEvents.eventId"
     );
-    const refunds = sponsor.sponsoredEvents.filter(
-      (e) => e.status === "Rejected"
-    );
+    if (!sponsor) {
+      return res.status(404).json({ message: "Sponsor not found" });
+    }
 
-    res.status(200).json({ pendingPayments, refunds });
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    res.status(200).json(sponsor.sponsoredEvents);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };

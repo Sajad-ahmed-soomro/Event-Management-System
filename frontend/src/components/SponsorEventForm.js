@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./SponsorEventForm.css"; // Include your custom CSS for this form
 
 const SponsorEventForm = ({ sponsorId }) => {
   const [eventId, setEventId] = useState("");
@@ -25,7 +26,6 @@ const SponsorEventForm = ({ sponsorId }) => {
     e.preventDefault();
 
     // Retrieve sponsorId from localStorage
-
     const storedSponsorId = localStorage.getItem("sponsorId");
 
     const eventData = {
@@ -56,36 +56,46 @@ const SponsorEventForm = ({ sponsorId }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sponsor a New Event</h2>
-      <div>
-        <label>Select Event:</label>
-        <select
-          value={eventId}
-          onChange={(e) => setEventId(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select an event
-          </option>
-          {events.map((event) => (
-            <option key={event._id} value={event._id}>
-              {event.title}
+    <div className="sponsor-event-form-container">
+      <div
+        style={{ height: "100vh" }}
+        className="absolute inset-0 bg-gradient-to-r from-[#17a2b8] via-[#fff] to-[#a649a6] animate-gradient blur-2xl -z-10"
+      ></div>
+      <form onSubmit={handleSubmit} className="sponsor-event-form">
+        <h2 className="form-title">Sponsor a New Event</h2>
+        <div className="form-group">
+          <label>Select Event:</label>
+          <select
+            value={eventId}
+            onChange={(e) => setEventId(e.target.value)}
+            required
+            className="form-input"
+          >
+            <option value="" disabled>
+              Select an event
             </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label>Contribution Amount:</label>
-        <input
-          type="number"
-          value={contributionAmount}
-          onChange={(e) => setContributionAmount(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Sponsor Event</button>
-    </form>
+            {events.map((event) => (
+              <option key={event._id} value={event._id}>
+                {event.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Contribution Amount:</label>
+          <input
+            type="number"
+            value={contributionAmount}
+            onChange={(e) => setContributionAmount(e.target.value)}
+            required
+            className="form-input"
+          />
+        </div>
+        <button type="submit" className="submit-button">
+          Sponsor Event
+        </button>
+      </form>
+    </div>
   );
 };
 

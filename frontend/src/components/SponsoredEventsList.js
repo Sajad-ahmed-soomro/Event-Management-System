@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./SponsoredEventsList.css"; // Include your custom CSS for this page
 
 const SponsoredEventsList = ({ sponsorId }) => {
   // Fallback to localStorage if sponsorId is not passed as a prop
@@ -13,11 +14,6 @@ const SponsoredEventsList = ({ sponsorId }) => {
 
         const response = await axios.get(
           `http://localhost:5000/api/sponsors/${resolvedSponsorId}/sponsored-events`
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-          //   },
-          // }
         );
         console.log(response.data);
         setEvents(response.data);
@@ -34,37 +30,41 @@ const SponsoredEventsList = ({ sponsorId }) => {
   }, [resolvedSponsorId]);
 
   return (
-    <div>
-      <h2>Sponsored Events</h2>
-      <ul>
+    <div className="sponsored-events-container">
+      <div
+        style={{ height: "100vh" }}
+        className="absolute inset-0 bg-gradient-to-r from-[#17a2b8] via-[#fff] to-[#a649a6] animate-gradient blur-2xl -z-10"
+      ></div>
+      <h2 className="section-title">Sponsored Events</h2>
+      <div className="events-list">
         {events.map((event) => (
-          <li key={event._id}>
-            <h3>{event.eventId.title}</h3>
-            <p>
+          <div className="event-card" key={event._id}>
+            <h3 className="event-title">{event.eventId.title}</h3>
+            <p className="event-category">
               <strong>Category:</strong> {event.eventId.category}
             </p>
-            <p>
+            <p className="event-date">
               <strong>Date:</strong>{" "}
               {new Date(event.eventId.date).toDateString()}
             </p>
-            <p>
+            <p className="event-location">
               <strong>Location:</strong> {event.eventId.location}
             </p>
-            <p>
+            <p className="event-status">
               <strong>Status:</strong> {event.status}
             </p>
-            <p>
+            <p className="event-approval-status">
               <strong>Approval Status:</strong> {event.eventId.approvalStatus}
             </p>
-            <p>
+            <p className="event-popularity">
               <strong>Popularity:</strong> {event.eventId.popularity}
             </p>
-            <p>
+            <p className="event-ticket-availability">
               <strong>Ticket Availability:</strong>{" "}
               {event.eventId.ticketAvailability ? "Available" : "Sold Out"}
             </p>
-            <p>
-              <strong>Sponsors:</strong>{" "}
+            <p className="event-sponsors">
+              <strong>Sponsors:</strong>
               {event.eventId.sponsors && event.eventId.sponsors.length > 0 ? (
                 <ul>
                   {event.eventId.sponsors.map((sponsor, index) => (
@@ -75,9 +75,9 @@ const SponsoredEventsList = ({ sponsorId }) => {
                 "No sponsors"
               )}
             </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,76 @@
+/* Styling for the Sponsor Event Form */
+.sponsor-event-form-container {
+  margin-top: 120px; /* Adjust for top bar and sidebar */
+  padding: 20px;
+  background: linear-gradient(135deg, #b85ccc, #17a2b8);
+  border-radius: 10px;
+  width: 100vh;
+  height: 100vh;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}
+
+.sponsor-event-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-top: 20%;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  color: #17a2b8; /* Color matching Sponsor Dashboard theme */
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #17a2b8; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #3498db; /* Hover effect */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .sponsor-event-form-container {
+    width: 100%;
+    padding: 15px;
+  }
+}

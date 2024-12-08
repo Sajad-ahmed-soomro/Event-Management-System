@@ -1,0 +1,94 @@
+/* General styles for the Sponsored Events List */
+.sponsored-events-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #b85ccc, #17a2b8);
+  margin-top: 10%;
+  margin-left: 45%;
+  border-radius: 10px;
+  width: 100vh; /* Adjust for the sidebar */
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bolder;
+  width: 100vh; /* Adjust for the sidebar */
+  color: #fff; /* Color matching the Sponsor Dashboard theme */
+  margin-bottom: 20px;
+}
+
+/* Event card container */
+.events-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.event-card {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3498db; /* Blue color for titles */
+  margin-bottom: 10px;
+}
+
+.event-category,
+.event-date,
+.event-location,
+.event-status,
+.event-approval-status,
+.event-popularity,
+.event-ticket-availability,
+.event-sponsors {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.event-sponsors ul {
+  padding-left: 20px;
+}
+
+.event-sponsors li {
+  color: #17a2b8;
+}
+
+.event-category strong,
+.event-date strong,
+.event-location strong,
+.event-status strong,
+.event-approval-status strong,
+.event-popularity strong,
+.event-ticket-availability strong,
+.event-sponsors strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.event-sponsors ul li {
+  list-style-type: none;
+  margin-left: 10px;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  .events-list {
+    flex-direction: column;
+    align-items: center;
+  }
+}

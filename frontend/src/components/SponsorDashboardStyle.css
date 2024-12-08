@@ -1,0 +1,167 @@
+/* General Reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 60px;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #b85ccc,
+    #17a2b8
+  ); /* Gradient background */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.logo {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo h2 {
+  font-size: 1.2em;
+  margin: 0;
+  display: none;
+}
+
+.sidebar:hover .logo h2 {
+  display: block;
+  color: #fff;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.nav-links li {
+  width: 100%;
+}
+
+.nav-links button {
+  text-decoration: none;
+  color: #fff;
+  background: none;
+  border: none;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-links button i {
+  font-size: 1.2em;
+}
+
+.nav-links button:hover {
+  background-color: #17a2b8;
+}
+
+/* Content Section */
+.content {
+  margin-left: 60px; /* Adjust to the collapsed sidebar width */
+  padding: 20px;
+  width: calc(100% - 60px); /* Ensure the content width respects the sidebar */
+  transition: margin-left 0.3s;
+  text-align: center;
+}
+
+.sidebar:hover ~ .content {
+  margin-left: 200px; /* Adjust for the expanded sidebar width */
+  width: calc(100% - 200px);
+}
+
+/* Welcome Message */
+.welcome-message {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 5%;
+  color: #000;
+}
+
+.welcome-message h2 {
+  font-size: 28px;
+  color: #000000;
+}
+
+.welcome-message p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+}
+/* Banner */
+.banner {
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 5%;
+  color: rgb(255, 255, 255);
+  background-size: cover;
+  background-position: center;
+  /* Adjust as needed */
+  border: 2px solid black;
+  animation: changeBackground 12s infinite; /* 12s for 3 background images (3 seconds per image) */
+  margin-bottom: 5%;
+}
+
+/* Keyframes to change the background */
+@keyframes changeBackground {
+  0% {
+    background-image: url("../images/Live\ life\ and\ enjoy\ the\ adventure.jpg");
+  }
+  33% {
+    background-image: url("../images/Bzns_Events_BG.jpg");
+  }
+  66% {
+    background-image: url("../images/download\ \(1\).jpg");
+  }
+  100% {
+    background-image: url("../images/You\ Can\ Get\ Tickets\ to\ These\ Summer\ Music\ Festivals\ for\ $99\ Right\ Now.jpg");
+  }
+}
+
+.banner h1 {
+  margin-top: 20%;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.banner p {
+  font-size: larger;
+  font-weight: bold;
+}

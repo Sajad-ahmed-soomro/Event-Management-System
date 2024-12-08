@@ -3,22 +3,30 @@
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
-}
-
+  
 h1 {
   text-align: center;
   font-size: 36px;
   color: #333;
 }
 
+/* This ensures the search input takes up 100% of the parent container's width */
 .search-bar {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  width: 100%; /* Ensure the search bar container spans the full width */
+  padding: 10px; /* Padding for the container */
+  margin-bottom: 20px; /* Space below the search bar */
 }
+
+.search-bar input {
+  width: 100%; /* Make the input field 100% width */
+  padding: 10px; /* Padding inside the input */
+  font-size: 16px; /* Font size */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border for the input */
+  outline: none; /* Remove the default focus outline */
+}
+
+
 
 .events-container {
   display: grid;
@@ -28,6 +36,7 @@ h1 {
   margin-top: 20px;
 }
 
+/* Existing event card style */
 .event-card {
   background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Light purple to blue gradient */
   border-radius: 10px;
@@ -86,7 +95,34 @@ h1 {
   color: #f75c8c; /* Red color for delete on hover */
 }
 
-/* Add a fixed floating button for adding new events */
+/* Transparent Add Event Card */
+.add-event-card {
+  background-color: transparent;
+  border: 2px dashed #007BFF;  /* Dashed border in blue */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 50px; /* Padding around the + icon */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-event-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.add-event-card .plus-icon {
+  color: #007BFF;  /* Blue color for the + icon */
+  font-size: 40px;
+  transition: color 0.3s ease;
+}
+
+.add-event-card:hover .plus-icon {
+  color: #4c8bf5;  /* Lighter blue on hover */
+}
+
+/* Fixed floating button for adding events (previously a button) */
 .add-event-btn {
   position: fixed;
   bottom: 30px;
@@ -107,9 +143,9 @@ h1 {
   color: white;
 }
 
-
-.register-manager-btn{
-padding: 10px 20px;
+/* Buttons for other actions */
+.register-manager-btn {
+  padding: 10px 20px;
   margin-left: 5px;
   background-color: #2965fb;
   color: white;
@@ -132,4 +168,10 @@ padding: 10px 20px;
 
 .manage-bookings-btn:hover {
   background-color: #218838;
+}
+
+.input{
+  width: 100%;
+}
+
 }

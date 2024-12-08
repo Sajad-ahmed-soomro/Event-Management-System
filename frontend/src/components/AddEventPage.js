@@ -48,12 +48,17 @@ const AddEventPage = () => {
       console.log("Response from API:", response);
 
       if (response.message === 'Event created and awaiting approval') {
-        navigate('/events');
+        navigate('/manager');
       }
     } catch (error) {
       console.error("Error creating event:", error);
       setError('Error creating event. Please try again.');
     }
+  };
+
+  // Function to navigate to /manager when the button is clicked
+  const handleGoBackToManager = () => {
+    navigate('/manager');
   };
 
   return (
@@ -137,6 +142,14 @@ const AddEventPage = () => {
           Create Event
         </button>
       </form>
+
+      {/* Green Go Back Button */}
+      <button
+        onClick={handleGoBackToManager}
+        className={styles.goBackButton}
+      >
+        Go Back to Events
+      </button>
     </div>
   );
 };

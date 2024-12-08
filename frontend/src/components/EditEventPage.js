@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../Styles/EditEventPage.css'; // Assuming you have your CSS for styling
+import '../Styles/EditEventPage.css';
 
 const EditEventPage = () => {
   const [event, setEvent] = useState({
@@ -9,15 +9,15 @@ const EditEventPage = () => {
     category: '',
     date: '',
     location: '',
-    managerName: '', // This will be the manager name
-    sponsorsNames: [], // This will be the list of sponsors (initialize as an empty array)
-    sponsorsIds: [] // Make sure sponsorsIds is part of the state initialization
+    managerName: '', // Manager name
+    sponsorsNames: [], // List of sponsors
+    sponsorsIds: [] // Sponsor IDs
   });
   
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the event ID from the URL
+  const { id } = useParams(); // Event ID from URL
 
   // Fetch event data when component mounts
   useEffect(() => {
@@ -25,7 +25,6 @@ const EditEventPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(`http://localhost:5000/api/events/${id}`);
-        console.log('Fetched Event Data:', response.data);  // Log the fetched event data for debugging
         setEvent(response.data);
         setLoading(false);
       } catch (err) {
@@ -36,21 +35,18 @@ const EditEventPage = () => {
     fetchEventData();
   }, [id]);
 
-  // Fetch manager name and sponsor names by their IDs
+  // Fetch manager and sponsor names
   useEffect(() => {
     const fetchManagerAndSponsors = async () => {
       try {
-        // Fetch Event Manager by ID (from manager's object ID)
         if (event.managerId) {
           const managerResponse = await axios.get(`http://localhost:5000/api/managers/${event.managerId}`);
-          console.log('Fetched Manager Data:', managerResponse.data);
           setEvent((prevState) => ({
             ...prevState,
             managerName: managerResponse.data.name,
           }));
         }
   
-        // Fetch Sponsors by their IDs
         if (event.sponsors && event.sponsors.length > 0) {
           const sponsorsResponses = await Promise.all(
             event.sponsors.map((sponsorId) =>
@@ -58,24 +54,20 @@ const EditEventPage = () => {
             )
           );
           const sponsorsNames = sponsorsResponses.map((response) => response.data.name);
-          console.log('Fetched Sponsors Names:', sponsorsNames);
           setEvent((prevState) => ({
             ...prevState,
             sponsorsNames: sponsorsNames,
           }));
-        } else {
-          console.log('No sponsors found');
         }
       } catch (err) {
-        console.error('Error fetching manager or sponsors:', err);
         setError('Error fetching manager or sponsors.');
       }
     };
   
     fetchManagerAndSponsors();
-  }, [event.managerId, event.sponsors]); // Depend on event.managerId and event.sponsors
-  
-  // Handle form input change
+  }, [event.managerId, event.sponsors]);
+
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEvent((prevEvent) => ({
@@ -94,15 +86,13 @@ const EditEventPage = () => {
         category: event.category,
         date: event.date,
         location: event.location,
-        managerName: event.managerName,  // Send the manager's name
-        sponsorsNames: event.sponsorsNames,  // Send the sponsors' names
+        managerName: event.managerName,
+        sponsorsNames: event.sponsorsNames,
       };
-      console.log('Before Update Data: ', updatedEvent);
-
       const response = await axios.put(`http://localhost:5000/api/events/${id}`, updatedEvent);
-      console.log('Updated Event Response:', response.data); // Log the updated event response for debugging
+      console.log(response);
       alert('Event updated successfully');
-      navigate('/manager'); // Redirect to the event management page
+      navigate('/manager'); // Redirect to the manager page
     } catch (error) {
       setError('Error updating event');
       setLoading(false);
@@ -112,11 +102,11 @@ const EditEventPage = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="edit-event-page">
+    <div className="editEventContainer">
       <h1>Edit Event</h1>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit} className="event-form">
-        <div className="form-group">
+      {error && <p className="errorMessage">{error}</p>}
+      <form onSubmit={handleSubmit} className="eventForm">
+        <div className="formGroup">
           <label>Title</label>
           <input
             type="text"
@@ -126,7 +116,7 @@ const EditEventPage = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formGroup">
           <label>Category</label>
           <input
             type="text"
@@ -136,17 +126,17 @@ const EditEventPage = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formGroup">
           <label>Date</label>
           <input
             type="date"
             name="date"
-            value={event.date ? event.date.slice(0, 10) : ''} // Ensure the date is in the required format yyyy-MM-dd
+            value={event.date ? event.date.slice(0, 10) : ''}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formGroup">
           <label>Location</label>
           <input
             type="text"
@@ -156,37 +146,40 @@ const EditEventPage = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="formGroup">
           <label>Manager Name</label>
           <input
             type="text"
             name="managerName"
-            value={event.managerName} // Manager's name populated here
+            value={event.managerName}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div className="form-group">
-  <label>Sponsors (Comma Separated)</label>
-  <input
-    type="text"
-    name="sponsorsNames"
-    value={Array.isArray(event.sponsorsNames) ? event.sponsorsNames.join(', ') : ''} // Show sponsors names as comma-separated
-    onChange={(e) => {
-      setEvent((prevEvent) => ({
-        ...prevEvent,
-        sponsorsNames: e.target.value.split(',') // No trimming yet, just split on commas
-      }));
-    }}
-    placeholder="Enter sponsor names separated by commas"
-    
-  />
-</div>
+        <div className="formGroup">
+          <label>Sponsors (Comma Separated)</label>
+          <input
+            type="text"
+            name="sponsorsNames"
+            value={Array.isArray(event.sponsorsNames) ? event.sponsorsNames.join(', ') : ''}
+            onChange={(e) => {
+              setEvent((prevEvent) => ({
+                ...prevEvent,
+                sponsorsNames: e.target.value.split(',') // Split sponsors names by comma
+              }));
+            }}
+            placeholder="Enter sponsor names separated by commas"
+          />
+        </div>
 
-
-
-        <button type="submit" className="submit-btn">Update Event</button>
+        <button type="submit" className="submitButton">Update Event</button>
       </form>
+      <button 
+        type="button" 
+        className="goBackButton" 
+        onClick={() => navigate('/manager')}>
+        Go Back to Events
+      </button>
     </div>
   );
 };

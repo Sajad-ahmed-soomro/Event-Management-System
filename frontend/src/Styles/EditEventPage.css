@@ -1,62 +1,102 @@
+/* EditEventPage.module.css */
 .editEventContainer {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-  }
+  max-width: 480px; /* Set a max width for the form */
+  margin: 20px auto; /* Center the container */
+  padding: 20px; /* Slightly reduced padding */
+  background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Gradient background */
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  color: white; /* Text color inside the form */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items at the top */
+  height: auto;
+  min-height: 450px; /* Set a minimum height to avoid card shrinking too much */
   
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .eventForm {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .formGroup {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  input,
-  textarea {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  textarea {
-    min-height: 100px;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .errorMessage {
-    color: red;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px; /* Adjusted space to balance layout */
+  color: #fff;
+}
+
+.eventForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduced gap between form fields */
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #fff; /* White label text */
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: white; /* White background for input fields */
+  color: #333; /* Dark text color for input */
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: #999; /* Light gray placeholder text */
+}
+
+input:focus {
+  border-color: #5E8CFF; /* Blue border when input is focused */
+  box-shadow: 0 0 5px rgba(94, 140, 255, 0.4); /* Soft blue glow */
+}
+
+.errorMessage {
+  color: #f75c8c; /* Red color for error messages */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.submitButton {
+  padding: 12px 20px;
+  background-color: #5E8CFF;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #4c7bcc; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+/* Green Go Back Button */
+.goBackButton {
+  padding: 12px 20px;
+  margin-top: 15px; /* Reduced margin to fit the layout better */
+  background-color: #28a745; /* Green background */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.goBackButton:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+}

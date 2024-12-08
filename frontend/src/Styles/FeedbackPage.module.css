@@ -1,32 +1,56 @@
 .feedbackPage {
-    padding: 20px;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for the page */
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
   }
   
   .feedbackContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Spacing between cards */
+    justify-content: center; /* Center cards horizontally */
     margin-top: 20px;
+    max-width: 1200px; /* Optional, to limit the maximum width */
+    margin-left: auto;
+    margin-right: auto; /* Center container */
   }
   
+  /* Styling for the feedback card */
   .feedbackCard {
-    background-color: #f8f9fa;
+    background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Light purple to blue gradient */
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .feedbackCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
   }
   
   .feedbackCard h3 {
-    margin: 0;
     font-size: 20px;
-    color: #333;
+    color: #fff;
+    margin: 0;
   }
   
   .feedbackCard p {
-    margin: 10px 0;
     font-size: 16px;
+    color: #fff;
+    margin: 10px 0;
   }
   
+  .feedbackCard strong {
+    color: #fff;
+  }
+  
+  /* Rating stars */
   .starFilled {
     color: gold;
   }
@@ -40,13 +64,35 @@
     border: none;
     cursor: pointer;
     color: #f75c8c;
+    transition: color 0.3s ease;
   }
   
   .feedbackActions button:hover {
-    color: #e24358;
+    color: #e24358; /* Red color for delete on hover */
   }
   
+  /* Back button styles */
   .backButton {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
   }
   
+  .backButton button {
+    padding: 10px 20px;
+    background-color: #5E8CFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .backButton button:hover {
+    transform: scale(1.05);
+    background-color: #4a7bb3;
+  }
+  
+}
+

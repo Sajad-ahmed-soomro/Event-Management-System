@@ -1,45 +1,86 @@
+/* BookingDetailsPage.module.css */
+
 .booking-details-page {
-    padding: 20px;
-    .booking-details {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .actions {
-      margin-top: 20px;
-    }
-    
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-right: 10px;
-    }
-    
-    button:disabled {
-      background-color: #d3d3d3;
-    }
-    
-    .go-back-btn {
-      padding: 10px 20px;
-      margin-top: 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    
-    .go-back-btn:hover {
-      background-color: #0056b3;
-    }
-    
-  }
-  
-  
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.booking-details {
+  background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Gradient similar to your event cards */
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  color: white; /* White text for readability */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.booking-details h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.booking-details p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.booking-details p strong {
+  font-weight: bold;
+}
+
+/* Actions Section */
+.actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button {
+  padding: 12px 20px;
+  background-color: #6A5ACD; /* Light purple color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 30%; /* Buttons will take up equal width */
+}
+
+.actions button:hover {
+  background-color: #4e3b8a; /* Darker shade of purple on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+.actions button:disabled {
+  background-color: #d3d3d3; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+/* Go Back Button */
+.go-back-btn {
+  padding: 12px 20px;
+  margin-top: 30px;
+  background-color: #5E8CFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.go-back-btn:hover {
+  background-color: #4c7bcc; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+/* Error Message */
+.error-message {
+  color: #f75c8c; /* Red color for error messages */
+  margin-top: 20px;
+  text-align: center;
+}

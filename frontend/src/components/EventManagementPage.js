@@ -55,6 +55,10 @@ const EventManagementPage = () => {
     navigate(`/event/${eventId}`);
   };
 
+  const handleAddEventCardClick = () => {
+    navigate('/add-event');
+  };
+
   const formatDate = (date) => {
     if (!date) return '';
     const d = new Date(date);
@@ -77,9 +81,6 @@ const EventManagementPage = () => {
           />
         </div>
         <div className={styles['header-actions']}>
-          <button className={styles['add-event-btn']} onClick={() => navigate('/add-event')}>
-            <FaPlus size={24} />
-          </button>
           <button className={styles['register-manager-btn']} onClick={() => navigate('/register-event-manager')}>
             Register Event Manager
           </button>
@@ -94,6 +95,14 @@ const EventManagementPage = () => {
       {error && <p>{error}</p>}
 
       <div className={styles['events-container']}>
+        {/* Transparent Add Event Card */}
+        <div 
+          className={styles['add-event-card']} 
+          onClick={handleAddEventCardClick}
+        >
+          <FaPlus size={40} className={styles['plus-icon']} />
+        </div>
+
         {filteredEvents.length === 0 ? (
           <p>No events available</p>
         ) : (

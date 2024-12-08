@@ -20,7 +20,7 @@ function App() {
         <Route path="/sponsor-dashboard" element={<SponsorDashboard />} />
         <Route path="/sponsored-events" element={<SponsoredEventsList />} />
         <Route path="/sponsor-event" element={<SponsorEventForm />} />
-        {/* Add other routes here */}
+        {/* Add other routes   here */}
       </Routes>
     </Router>
   );

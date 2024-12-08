@@ -1,16 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 const SponsorDashboard = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {
-    navigate(path);
+    navigate(path, { state: { sponsorId } });
   };
+  const location = useLocation();
+  const { sponsorId } = location.state || {}; // Retrieve sponsorId from state
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Welcome, Sponsor!</h1>
+      <h1>Sponsor Dashboard</h1>
+      {sponsorId ? (
+        <p>Welcome Sponsor! Your ID: {sponsorId}</p>
+      ) : (
+        <p>Sponsor ID not provided</p>
+      )}
       <div style={{ marginTop: "20px" }}>
         <button
           onClick={() => handleNavigate("/sponsored-events")}

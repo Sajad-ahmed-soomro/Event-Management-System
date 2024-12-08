@@ -33,6 +33,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 const PORT = process.env.PORT || 5000;

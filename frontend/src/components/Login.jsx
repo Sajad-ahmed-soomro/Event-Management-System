@@ -25,13 +25,22 @@ const Login = () => {
           : "http://localhost:5000/api/users/login",
         payload
       );
+      console.log("Backend Response:", response.data);
       if (response.data.success) {
         alert(
           `Login successful as ${userType === "sponsor" ? "Sponsor" : "User"}!`
         );
-        if (userType === "user")
-          navigate("/user-dashboard"); // Navigate to dashboard after login
-        else navigate("/sponsor-dashboard");
+
+        if (userType === "sponsor") {
+          localStorage.setItem("sponsorId", response.data.sponsorId); // Assuming response contains sponsorId
+
+          // Pass sponsorId to the Sponsor Dashboard
+          navigate("/sponsor-dashboard", {
+            state: { sponsorId: response.data.sponsorId },
+          });
+        }
+
+        if (userType === "user") navigate("/user-dashboard");
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
       }

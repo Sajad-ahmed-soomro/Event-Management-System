@@ -24,8 +24,12 @@ const SponsorEventForm = ({ sponsorId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Retrieve sponsorId from localStorage
+
+    const storedSponsorId = localStorage.getItem("sponsorId");
+
     const eventData = {
-      sponsorId,
+      sponsorId: storedSponsorId,
       eventId,
       contributionAmount,
     };
@@ -42,10 +46,10 @@ const SponsorEventForm = ({ sponsorId }) => {
           },
         }
       );
-      console.log("Event sponsored successfully:", response.data.message);
-      console.log("Updated sponsor:", response.data.sponsor);
-      console.log("Updated event:", response.data.event);
+      console.log("Event sponsored successfully from form:", response.data);
       alert("Event Sponsored Successfully!");
+      console.log(storedSponsorId);
+      console.log(eventId);
     } catch (err) {
       console.error("Error sponsoring event:", err);
     }

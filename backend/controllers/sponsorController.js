@@ -18,6 +18,7 @@ exports.loginSponsor = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Login successful as Sponsor",
+      sponsorId: sponsor._id, // Include the sponsorId in the response
       token: generateToken(sponsor._id),
     });
   } catch (error) {
@@ -26,52 +27,53 @@ exports.loginSponsor = async (req, res) => {
 };
 
 // Add a new sponsored event
-// Add a new sponsored event
+
 exports.sponsorNewEvent = async (req, res) => {
   const { sponsorId, eventId, contributionAmount } = req.body;
-
   try {
-    // Find the sponsor by ID
+    // Find the sponsor and event
     const sponsor = await Sponsor.findById(sponsorId);
     if (!sponsor) {
       return res.status(404).json({ message: "Sponsor not found" });
     }
 
-    // Find the event by ID
     const event = await Event.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Add the new event to the sponsor's sponsoredEvents
+    // Update sponsor's data
     sponsor.sponsoredEvents.push({
       eventId,
       contributionAmount,
-      status: "Pending", // Default status
+      status: "Pending",
     });
+    console.log("Updated sponsor before save:", sponsor);
 
-    // Update the sponsor's totalContributions
     sponsor.totalContributions += contributionAmount;
 
-    // Add the sponsor to the event's sponsors list
+    // Update event's data
     event.sponsors.push(sponsorId);
 
-    // Save both the sponsor and event
+    // Save both entities
     await sponsor.save();
     await event.save();
 
-    // Make sure to use .populate() or select the fields you want to return if necessary
+    // Fetch updated sponsor with populated fields
     const updatedSponsor = await Sponsor.findById(sponsorId).populate(
       "sponsoredEvents.eventId"
     );
+
+    // Fetch updated event with populated fields
     const updatedEvent = await Event.findById(eventId).populate("sponsors");
 
-    // Send back the updated sponsor and event data in the response
     res.status(201).json({
-      message: "Event sponsored successfully",
-      sponsor: updatedSponsor, // Include the updated sponsor object
-      event: updatedEvent, // Include the updated event object
+      message: "Event sponsored successfully FROM FUNCTION",
+      sponsor: updatedSponsor,
+      event: updatedEvent,
     });
+    console.log("Updated Sponsor:", updatedSponsor);
+    console.log("Updated Event:", updatedEvent);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });

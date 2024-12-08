@@ -106,3 +106,30 @@ h1 {
 .add-event-btn svg {
   color: white;
 }
+
+
+.register-manager-btn{
+padding: 10px 20px;
+  margin-left: 5px;
+  background-color: #2965fb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.manage-bookings-btn {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #2965fb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.manage-bookings-btn:hover {
+  background-color: #218838;
+}

@@ -1,0 +1,82 @@
+.bookings-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .bookings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .booking-card {
+    background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Light purple to blue gradient */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .booking-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    opacity: 0.9; /* Slightly reduce opacity on hover */
+  }
+  
+  .booking-card h3 {
+    font-size: 24px;
+    color: #fff; /* White text for the title */
+    margin: 0;
+  }
+  
+  .booking-card p {
+    color: #fff;
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+  }
+  
+  .go-back-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #2965fb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: auto; /* Adjust width based on content */
+    display: block; /* Makes the button behave as a block element */
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+  }
+  
+  
+  .go-back-btn:hover {
+    background-color: #218838;
+  }
+  
+}
+

@@ -4,6 +4,9 @@ const eventRoutes = require('./routes/eventRoutes');
 const managerRoutes = require('./routes/managerRoutes'); // Import manager routes
 const sponsorRoutes = require('./routes/sponsorRoutes'); // Import sponsor routes
 const eventManagerRoutes = require('./routes/managerRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 
 require('dotenv').config();
 const cors = require('cors');  // Import CORS package
@@ -22,6 +25,8 @@ app.use('/api/events', eventRoutes);  // Use eventRoutes for API requests
 app.use('/api/managers', managerRoutes);  // Use managerRoutes for manager-related API requests
 app.use('/api/sponsors', sponsorRoutes);
 app.use('/api/event-manager', eventManagerRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/users', userRoutes);
 
 // Server
 const PORT = process.env.PORT || 5000;

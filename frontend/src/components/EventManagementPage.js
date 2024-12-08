@@ -83,6 +83,11 @@ const EventManagementPage = () => {
           <button className={styles['register-manager-btn']} onClick={() => navigate('/register-event-manager')}>
             Register Event Manager
           </button>
+
+          {/* Add Bookings Management button */}
+          <button className={styles['manage-bookings-btn']} onClick={() => navigate('/bookings')}>
+            Manage Bookings
+          </button>
         </div>
       </div>
 

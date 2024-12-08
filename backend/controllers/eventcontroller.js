@@ -98,17 +98,64 @@ const getEventById = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch event' });
   }
 };
-
-// UPDATE: Update event details (Admin Approval)
 const updateEvent = async (req, res) => {
   try {
-    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const { title, category, date, location, managerName, sponsorsNames } = req.body;
+
+    // Find the manager by name
+    const manager = await Manager.findOne({ name: managerName });
+    if (!manager) {
+      return res.status(400).json({ error: 'Manager not found with the provided name.' });
+    }
+
+    // Find sponsors by their names
+    const sponsors = await Sponsor.find({ name: { $in: sponsorsNames } });
+
+    // Create a map to track the found sponsors by name
+    const foundSponsorsMap = sponsors.reduce((map, sponsor) => {
+      map[sponsor.name] = sponsor._id;
+      return map;
+    }, {});
+    
+    const missingSponsors = [];
+
+    // Check for each sponsor name in sponsorsNames if it's found
+    for (let name of sponsorsNames) {
+      if (!foundSponsorsMap[name]) {
+        missingSponsors.push(name);
+      }
+    }
+
+    // If there are any missing sponsors, return an error
+    if (missingSponsors.length > 0) {
+      return res.status(400).json({
+        error: `Sponsors not found: ${missingSponsors.join(', ')}`
+      });
+    }
+
+    // Map the found sponsors' IDs
+    const sponsorIds = sponsors.map(sponsor => sponsor._id);
+
+    // Prepare the updated event data
+    const updatedEventData = {
+      title,
+      category,
+      date,
+      location,
+      managerId: manager._id,  // Use the manager's ObjectId
+      sponsors: sponsorIds,  // Use the sponsors' ObjectIds
+    };
+
+    // Find and update the event
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, updatedEventData, { new: true });
     if (!updatedEvent) {
       return res.status(404).json({ error: 'Event not found' });
     }
+
     res.json(updatedEvent);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update event' });
+    console.error('Error updating event:', error);  // Log the error
+    res.status(500).json({ error: 'Failed to update event', details: error.message });
   }
 };
 

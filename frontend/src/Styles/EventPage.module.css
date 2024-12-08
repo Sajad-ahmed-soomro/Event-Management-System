@@ -1,48 +1,81 @@
 .eventPage {
     max-width: 900px;
     margin: 20px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: linear-gradient(135deg, #D6A5FF, #5E8CFF); /* Gradient from purple to blue */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    color: #fff; /* White text to contrast with gradient */
+    font-family: 'Arial', sans-serif; /* Clean font for readability */
+    text-align: center;
   }
   
   .eventPage h1 {
-    text-align: center;
     font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #fff; /* White for the header */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for readability */
   }
   
   .eventDetails {
     font-size: 18px;
-    color: #555;
+    color: #fff;
+    line-height: 1.6;
+    text-align: left;
   }
   
   .eventDetails p {
-    margin: 10px 0;
+    margin: 15px 0;
   }
   
   .eventDetails strong {
-    color: #333;
+    color: #FFD700; /* Gold color for emphasis */
+    font-weight: bold;
+  }
+  
+  .actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .actions button {
+    padding: 12px 25px;
+    background-color: #5E8CFF;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .actions button:hover {
+    background-color: #4c8bf5;
+    transform: translateY(-3px); /* Button hover effect */
   }
   
   .backButton {
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
   
   .backButton button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px 25px;
+    background-color: #2965fb;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
+    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
   .backButton button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
+    transform: translateY(-3px); /* Button hover effect */
   }
   

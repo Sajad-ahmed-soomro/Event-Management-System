@@ -1,0 +1,52 @@
+.feedbackPage {
+    padding: 20px;
+  }
+  
+  .feedbackContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .feedbackCard {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedbackCard h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .feedbackCard p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .starFilled {
+    color: gold;
+  }
+  
+  .starEmpty {
+    color: #dcdcdc;
+  }
+  
+  .feedbackActions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #f75c8c;
+  }
+  
+  .feedbackActions button:hover {
+    color: #e24358;
+  }
+  
+  .backButton {
+    margin-top: 20px;
+  }
+  

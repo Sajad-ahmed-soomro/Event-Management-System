@@ -21,7 +21,7 @@ const EventManagerRegistrationForm = () => {
     };
 
     const handleBackToEvents = () => {
-        navigate('/events');  // Redirect to /events when button is clicked
+        navigate('/manager');  // Redirect to /events when button is clicked
     };
 
     return (

@@ -102,7 +102,7 @@ const EditEventPage = () => {
       const response = await axios.put(`http://localhost:5000/api/events/${id}`, updatedEvent);
       console.log('Updated Event Response:', response.data); // Log the updated event response for debugging
       alert('Event updated successfully');
-      navigate('/events'); // Redirect to the event management page
+      navigate('/manager'); // Redirect to the event management page
     } catch (error) {
       setError('Error updating event');
       setLoading(false);

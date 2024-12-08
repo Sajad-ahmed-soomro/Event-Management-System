@@ -8,13 +8,14 @@ import EventManagerRegistrationForm from './components/EventManagerRegistrationF
 import BookingsPage from './components/BookingsPage.js';  // Import BookingsPage component
 import BookingDetailsPage from './components/BookingDetailsPage'; 
 import BookingsHistoryPage from './components/BookingsHistoryPage';
+import FeedbackPage from './components/FeedbackPage'; // Feedback Page
 
 function App() {
   return (
     <Router>
       <Routes>  {/* Replace Switch with Routes */}
         <Route path="/add-event" element={<AddEventPage />} />  {/* Use element instead of component */}
-        <Route path="/events" element={<EventManagementPage />} />
+        <Route path="/manager" element={<EventManagementPage />} />
         <Route path="/edit-event/:id" element={<EditEventPage />} />  {/* Add the route for editing an event */}
         <Route path="/event/:id" element={<EventPage />} /> {/* Add route for EventPage */}
         <Route path="/register-event-manager" element={<EventManagerRegistrationForm />} />  {/* Add route for Event Manager registration */}
@@ -24,6 +25,7 @@ function App() {
         {/* Add the route for BookingDetailsPage */}
         <Route path="/booking/:id" element={<BookingDetailsPage />} /> {/* Booking details by ID */}
         <Route path="/bookings-history/:eventId" element={<BookingsHistoryPage />} />
+        <Route path="/feedback/:eventId" element={<FeedbackPage />} />
       </Routes>
     </Router>
   );

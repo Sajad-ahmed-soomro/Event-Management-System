@@ -46,7 +46,7 @@ const BookingsPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/events');
+    navigate('/manager');
   };
 
   return (

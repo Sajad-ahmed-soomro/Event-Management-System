@@ -27,8 +27,8 @@ const CustomerDashboard = () => {
             </a>
           </li>
           <li>
-            <a href="#my-bookings">
-              <i className="fas fa-book"></i>My Bookings
+            <a onClick={() => handleNavigate("/events")}>
+              <i className="fas fa-calendar-alt"></i>My booked Events
             </a>
           </li>
           <li>

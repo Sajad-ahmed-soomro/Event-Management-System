@@ -1,6 +1,7 @@
 // server.js (or app.js)
 const express = require("express");
 const mongoose = require("mongoose");
+const User = require("./models/User");
 const cors = require("cors");
 require("dotenv").config();
 const userRoutes = require("./Routes/userRoutes");
@@ -20,7 +21,25 @@ app.use(cors());
 mongoose
   .connect(process.env.MONGO_URI, {})
   .then(() => console.log("MongoDB connected"));
+const updateUser = async () => {
+  try {
+    const users = await User.find({});
 
+    users.forEach(async (user) => {
+      // Check if the user does not have the bookedEvents field, then add it
+      if (!user.profile.bookedEvents) {
+        user.profile.bookedEvents = [];
+        await user.save();
+      }
+    });
+
+    console.log("Users updated with bookedEvents field.");
+  } catch (error) {
+    console.error("Error updating users:", error);
+  }
+};
+
+updateUser();
 // Use Routes
 app.use("/api/users", userRoutes);
 app.use("/api/sponsors", sponsorRoutes); // Add sponsor routes

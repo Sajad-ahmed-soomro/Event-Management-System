@@ -101,7 +101,10 @@ const EventDiscovery = () => {
               {events.map((event) => (
                 <li key={event._id}>
                   <span>{event.title}</span> - {event.category} - {event.date}
-                  <button onClick={() => handleBookEvent(event._id)}>
+                  <button
+                    class="btn"
+                    onClick={() => handleBookEvent(event._id)}
+                  >
                     Book Event
                   </button>
                 </li>

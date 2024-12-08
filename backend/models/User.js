@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   status: { type: String, default: "Active" },
   profile: {
     favoriteEvents: [String], // Add other fields if necessary
+    bookedEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }], // Reference to booked events
   },
 });
 

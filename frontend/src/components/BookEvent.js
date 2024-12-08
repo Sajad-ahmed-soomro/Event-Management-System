@@ -1,10 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./BookEvent.css"; // Import a CSS file for styling
 
 const BookEvent = () => {
   const { eventId } = useParams();
-  console.log("Event Id:", eventId);
   const navigate = useNavigate();
 
   const [eventDetails, setEventDetails] = useState(null); // Store event details
@@ -30,7 +30,6 @@ const BookEvent = () => {
 
   const handleBooking = async () => {
     const userId = localStorage.getItem("userId");
-    console.log("User id:", userId);
     setLoading(true);
     try {
       const bookingData = {
@@ -44,6 +43,7 @@ const BookEvent = () => {
         "http://localhost:5000/api/bookings",
         bookingData
       );
+
       const { paymentUrl } = bookingResponse.data; // URL to Stripe or PayPal
 
       setLoading(false);
@@ -55,10 +55,10 @@ const BookEvent = () => {
   };
 
   return (
-    <div>
+    <div className="booking-container">
       <h1>Book Event</h1>
       {eventDetails ? (
-        <div>
+        <div className="event-details">
           <p>Booking details for event ID: {eventId}</p>
           <h2>{eventDetails.title}</h2>
           <p>Category: {eventDetails.category}</p>
@@ -69,7 +69,7 @@ const BookEvent = () => {
         <p>Loading event details...</p>
       )}
 
-      <div>
+      <div className="ticket-selection">
         <label htmlFor="ticketType">Select Ticket Type:</label>
         <select
           id="ticketType"
@@ -81,7 +81,11 @@ const BookEvent = () => {
         </select>
       </div>
 
-      <button onClick={handleBooking} disabled={loading}>
+      <button
+        className="book-button"
+        onClick={handleBooking}
+        disabled={loading}
+      >
         {loading ? "Processing..." : "Book Now"}
       </button>
     </div>

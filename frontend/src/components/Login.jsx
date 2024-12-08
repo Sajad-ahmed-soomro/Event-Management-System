@@ -40,7 +40,12 @@ const Login = () => {
           });
         }
 
-        if (userType === "user") navigate("/user-dashboard");
+        if (userType === "user") {
+          console.log("User id:", response.data);
+          console.log("User id:", response.data.userId);
+          localStorage.setItem("userId", response.data.userId); // Assuming response includes userId
+          navigate("/user-dashboard");
+        }
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
       }

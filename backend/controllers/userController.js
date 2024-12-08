@@ -77,6 +77,7 @@ exports.loginUser = async (req, res) => {
       success: true,
       message: "Login successful as User",
       userType: "user",
+      userId: user._id,
       token: generateToken(user._id),
     });
   } catch (error) {

@@ -10,6 +10,8 @@ const session = require("express-session");
 const authRoutes = require("./routes/authRoutes"); // Add Google auth routes
 const profileRoutes = require("./routes/profileRoutes"); // Add this import
 const eventRoutes = require("./routes/eventRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -25,6 +27,8 @@ app.use("/api/sponsors", sponsorRoutes); // Add sponsor routes
 
 app.use("/api/events", eventRoutes);
 app.use("/api/auth", authRoutes); // Use Google auth routes
+// Use '/api/bookings' as the base route for booking-related endpoints
+app.use("/api/bookings", bookingRoutes);
 app.use("/api/profile", profileRoutes);
 app.use(
   session({

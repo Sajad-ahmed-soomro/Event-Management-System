@@ -146,4 +146,19 @@ router.post("/sponsor", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// Get event by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    res.status(200).json(event);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

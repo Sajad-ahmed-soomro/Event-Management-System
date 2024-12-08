@@ -4,6 +4,9 @@ const Booking = require("../models/Booking");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); // Replace with your Stripe secret key
 
 router.post("/", async (req, res) => {
+  console.log("Request received from frontend:");
+  console.log("Headers:", req.headers);
+  console.log("Body:", req.body);
   try {
     const { eventId, userId, ticketType } = req.body;
 

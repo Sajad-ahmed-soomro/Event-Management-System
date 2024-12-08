@@ -4,6 +4,7 @@ import axios from "axios";
 
 const BookEvent = () => {
   const { eventId } = useParams();
+  console.log("Event Id:", eventId);
   const navigate = useNavigate();
 
   const [eventDetails, setEventDetails] = useState(null); // Store event details
@@ -28,11 +29,13 @@ const BookEvent = () => {
   }, [eventId]);
 
   const handleBooking = async () => {
+    const userId = localStorage.getItem("userId");
+    console.log("User id:", userId);
     setLoading(true);
     try {
       const bookingData = {
         eventId,
-        userId: "USER_ID_FROM_AUTH", // Replace with actual user ID from authentication
+        userId, // Replace with actual user ID from authentication
         ticketType,
         paymentStatus: "Pending",
       };
@@ -56,6 +59,7 @@ const BookEvent = () => {
       <h1>Book Event</h1>
       {eventDetails ? (
         <div>
+          <p>Booking details for event ID: {eventId}</p>
           <h2>{eventDetails.title}</h2>
           <p>Category: {eventDetails.category}</p>
           <p>Date: {new Date(eventDetails.date).toLocaleDateString()}</p>

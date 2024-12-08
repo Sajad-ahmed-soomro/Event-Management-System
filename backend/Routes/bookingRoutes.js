@@ -1,3 +1,4 @@
+// BookingRoutes.js
 const express = require('express');
 const router = express.Router();
 const BookingController = require('../controllers/bookingController');
@@ -10,5 +11,8 @@ router.get('/:id', BookingController.getBookingById);
 
 // Update booking status (approve/reject/cancel)
 router.patch('/:id', BookingController.updateBookingStatus);
+
+// Get bookings for a specific event
+router.get('/event/:eventId', BookingController.getBookingsForEvent);
 
 module.exports = router;

@@ -1,0 +1,52 @@
+.bookingsHistoryPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .bookingsContainer {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .bookingCard {
+    background: linear-gradient(to right, #D6A5FF, #5E8CFF); /* Light purple to blue gradient */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .bookingCard p {
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .backButton {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #2965fb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  

@@ -1,3 +1,4 @@
+// BookingController.js
 const Booking = require('../models/Booking');
 const Event = require('../models/Event');
 const User = require('../models/User');
@@ -49,5 +50,25 @@ exports.updateBookingStatus = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Get bookings for a specific event
+exports.getBookingsForEvent = async (req, res) => {
+  try {
+    // Find all bookings where eventId matches the eventId parameter
+    const bookings = await Booking.find({ eventId: req.params.eventId })
+      .populate('userId')  // Populate userId to show client details
+      .populate('eventId') // Populate eventId to show event details
+      .exec();
+
+    if (bookings.length === 0) {
+      return res.status(404).json({ message: 'No bookings found for this event' });
+    }
+
+    res.json(bookings);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching bookings' });
   }
 };

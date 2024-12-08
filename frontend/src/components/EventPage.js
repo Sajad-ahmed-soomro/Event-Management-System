@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../Styles/EventPage.module.css'; // Add your custom styles
 
 const EventPage = () => {
   const { id } = useParams();  // Get the event ID from the URL
+  const navigate = useNavigate();  // Hook to navigate to a different page
   const [event, setEvent] = useState(null);
   const [manager, setManager] = useState(null);
   const [sponsors, setSponsors] = useState([]);
@@ -54,8 +55,14 @@ const EventPage = () => {
         <p><strong>Manager:</strong> {manager.name}</p> {/* Display Manager's Name */}
         <p><strong>Sponsors:</strong> {sponsors.map(sponsor => sponsor.name).join(', ')}</p> {/* Display Sponsors' Names */}
       </div>
+
+      <div className={styles.actions}>
+        {/* Button to View Booking History */}
+        <button onClick={() => navigate(`/bookings-history/${id}`)}>View Bookings History</button>
+      </div>
+
       <div className={styles.backButton}>
-        <button onClick={() => window.history.back()}>Back to Events</button>
+        <button onClick={() => navigate(`/events`)}>Back to Events</button>
       </div>
     </div>
   );

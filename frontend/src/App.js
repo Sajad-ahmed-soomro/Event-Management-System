@@ -5,8 +5,9 @@ import EventManagementPage from './components/EventManagementPage';
 import EditEventPage from './components/EditEventPage';  // Import EditEventPage
 import EventPage from './components/EventPage';
 import EventManagerRegistrationForm from './components/EventManagerRegistrationForm';
-import BookingsPage from './components/BookingsPage';  // Import BookingsPage component
+import BookingsPage from './components/BookingsPage.js';  // Import BookingsPage component
 import BookingDetailsPage from './components/BookingDetailsPage'; 
+import BookingsHistoryPage from './components/BookingsHistoryPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         
         {/* Add the route for BookingDetailsPage */}
         <Route path="/booking/:id" element={<BookingDetailsPage />} /> {/* Booking details by ID */}
+        <Route path="/bookings-history/:eventId" element={<BookingsHistoryPage />} />
       </Routes>
     </Router>
   );

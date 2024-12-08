@@ -18,7 +18,7 @@ const HomePage = () => {
             </a>
           </li>
           <li>
-            <a href="#show-gallery">
+            <a href="/event-details/:eventId">
               <i className="fas fa-ticket-alt"></i>Our Events
             </a>
           </li>

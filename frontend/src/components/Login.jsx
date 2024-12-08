@@ -44,7 +44,9 @@ const Login = () => {
           console.log("User id:", response.data);
           console.log("User id:", response.data.userId);
           localStorage.setItem("userId", response.data.userId); // Assuming response includes userId
-          navigate("/user-dashboard");
+          navigate("/user-dashboard", {
+            state: { userId: response.data.userId },
+          });
         }
       } else {
         setErrorMessage("Invalid credentials. Please try again.");

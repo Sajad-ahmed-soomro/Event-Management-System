@@ -119,7 +119,6 @@ html {
 }
 
 .top-bar h1 {
-  flex-grow: 1;
   font-weight: bolder;
   font-size: xx-large;
 }

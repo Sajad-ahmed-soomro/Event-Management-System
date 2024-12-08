@@ -3,6 +3,8 @@ const express = require("express");
 const { protect } = require("../middleware/authMiddleware");
 const { getUserDashboard } = require("../controllers/userController");
 const User = require("../models/User");
+const Feedback = require("../models/Feedback");
+const Event = require("../models/Event");
 const router = express.Router();
 const {
   registerUser,
@@ -31,5 +33,30 @@ router.get("/:userId/booked-events", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// Add feedback for a booked event
+router.post("/:userId/event/:eventId/feedback", async (req, res) => {
+  const { userId, eventId } = req.params;
+  const { content, rating } = req.body;
 
+  try {
+    // Create a new feedback
+    const feedback = new Feedback({
+      userId,
+      eventId,
+      content,
+      rating,
+    });
+
+    // Save the feedback to the database
+    await feedback.save();
+
+    // Update the event with the feedback
+    const event = await Event.findById(eventId);
+    console.log("Eeeventtt iddddd:", event);
+    res.status(200).json({ message: "Feedback added successfully", feedback });
+  } catch (error) {
+    console.error("Error adding feedback:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 module.exports = router;

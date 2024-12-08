@@ -9,6 +9,8 @@ import SponsorEventForm from "./components/SponsorEventForm";
 import CustomerDashboard from "./components/CustomerDashboard";
 import EventDiscovery from "./components/EventDiscovery";
 import BookEvent from "./components/BookEvent";
+import MyBookings from "./components/MyBookings.js";
+import EventDetails from "./components/EventDetails.js";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/sponsor-event" element={<SponsorEventForm />} />
         <Route path="/events" element={<EventDiscovery />} />
         <Route path="/book-event/:eventId" element={<BookEvent />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/event-details/:eventId" element={<EventDetails />} />
         {/* Add other routes   here */}
       </Routes>
     </Router>

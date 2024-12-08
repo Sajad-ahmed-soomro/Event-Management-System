@@ -7,10 +7,11 @@ import Logo from "../images/webProject_Logo.png";
 const CustomerDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { customerId } = location.state || {}; // Retrieve customerId from state
+  const { userId } = location.state || {}; // Retrieve customerId from state
 
   const handleNavigate = (path) => {
-    navigate(path, { state: { customerId } });
+    console.log("sending iddddddd", userId);
+    navigate(path, { state: { userId } });
   };
 
   return (
@@ -27,8 +28,8 @@ const CustomerDashboard = () => {
             </a>
           </li>
           <li>
-            <a onClick={() => handleNavigate("/events")}>
-              <i className="fas fa-calendar-alt"></i>My booked Events
+            <a onClick={() => handleNavigate("/my-bookings")}>
+              <i className="fas fa-book"></i>My Bookings
             </a>
           </li>
           <li>
@@ -39,11 +40,6 @@ const CustomerDashboard = () => {
           <li>
             <a href="#reviews">
               <i className="fas fa-star"></i>Reviews
-            </a>
-          </li>
-          <li>
-            <a href="#favorites">
-              <i className="fas fa-heart"></i>Favorites
             </a>
           </li>
         </ul>

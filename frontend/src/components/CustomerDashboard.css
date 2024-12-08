@@ -1,0 +1,153 @@
+/* General Reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 60px; /* Collapsed width */
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #b85ccc,
+    #17a2b8
+  ); /* Gradient background */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: width 0.3s ease-in-out;
+  position: fixed; /* Fix sidebar position */
+  top: 0;
+  left: 0;
+  z-index: 1100;
+}
+
+.sidebar:hover {
+  width: 200px; /* Expanded width */
+}
+
+.logo {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo h2 {
+  font-size: 1.2em;
+  margin: 0;
+  display: none;
+}
+
+.sidebar:hover .logo h2 {
+  display: block;
+  color: #fff;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.nav-links li {
+  width: 100%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-links a i {
+  font-size: 1.2em;
+  margin-left: 12px;
+}
+
+.nav-links a:hover {
+  background-color: #17a2b8;
+}
+
+/* Content Section */
+.content {
+  margin-top: 100px;
+  margin-left: 60px;
+  padding: 20px;
+  width: calc(100% - 60px);
+  transition: margin-left 0.3s;
+}
+
+.sidebar:hover ~ .content {
+  margin-left: 200px;
+  width: calc(100% - 200px);
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  height: 20%;
+}
+
+.top-bar img {
+  margin-left: 5%;
+  margin-right: 20%;
+}
+
+.top-bar h1 {
+  flex-grow: 1;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+/* Welcome Message */
+.welcome-message {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.welcome-message h2 {
+  font-size: 28px;
+  color: #000000;
+}
+
+.welcome-message p {
+  font-size: 16px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.footer {
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 5%;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #b85ccc, #17a2b8);
+}

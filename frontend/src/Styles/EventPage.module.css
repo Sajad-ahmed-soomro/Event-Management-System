@@ -1,0 +1,48 @@
+.eventPage {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .eventPage h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .eventDetails {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .eventDetails p {
+    margin: 10px 0;
+  }
+  
+  .eventDetails strong {
+    color: #333;
+  }
+  
+  .backButton {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .backButton button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .backButton button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'; // Importing icons
-import '../Styles/EventManagementPage.module.css'; // Import your CSS file for custom styling
+import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
+import styles from '../Styles/EventManagementPage.module.css'; // Correct CSS Module import
 
 const EventManagementPage = () => {
   const [events, setEvents] = useState([]);
@@ -10,12 +10,11 @@ const EventManagementPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Fetch events from the backend when the component mounts
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/events');  // Make sure the URL is correct
-        setEvents(response.data);  // Assuming the response returns an array of events
+        const response = await axios.get('http://localhost:5000/api/events'); 
+        setEvents(response.data); 
       } catch (error) {
         setError('Error fetching events');
         console.error(error);
@@ -25,23 +24,19 @@ const EventManagementPage = () => {
     fetchEvents();
   }, []);
 
-  // Handle Search Input Change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Filter events based on the search query
   const filteredEvents = events.filter((event) => {
     return event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
            event.category.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
-  // Navigate to Edit Event Page
   const handleEdit = (eventId) => {
     navigate(`/edit-event/${eventId}`);
   };
 
-  // Handle Delete Event with Confirmation
   const handleDelete = (eventId) => {
     if (window.confirm('Are you sure you want to delete this event?')) {
       axios
@@ -56,21 +51,24 @@ const EventManagementPage = () => {
     }
   };
 
-  // Helper function to format date to "yyyy-MM-dd"
+  const handleCardClick = (eventId) => {
+    navigate(`/event/${eventId}`);
+  };
+
   const formatDate = (date) => {
     if (!date) return '';
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0'); // Add leading zero if month < 10
-    const day = String(d.getDate()).padStart(2, '0'); // Add leading zero if day < 10
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
 
   return (
-    <div className="event-management-page">
-      <div className="header">
+    <div className={styles['event-management-page']}>
+      <div className={styles.header}>
         <h1>Event Management</h1>
-        <div className="search-bar">
+        <div className={styles['search-bar']}>
           <input
             type="text"
             placeholder="Search Events..."
@@ -78,29 +76,38 @@ const EventManagementPage = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <button className="add-event-btn" onClick={() => navigate('/add-event')}>
-          <FaPlus size={24} />
-        </button>
+        <div className={styles['header-actions']}>
+          <button className={styles['add-event-btn']} onClick={() => navigate('/add-event')}>
+            <FaPlus size={24} />
+          </button>
+          <button className={styles['register-manager-btn']} onClick={() => navigate('/register-event-manager')}>
+            Register Event Manager
+          </button>
+        </div>
       </div>
 
       {error && <p>{error}</p>}
 
-      <div className="events-container">
+      <div className={styles['events-container']}>
         {filteredEvents.length === 0 ? (
           <p>No events available</p>
         ) : (
           filteredEvents.map((event) => (
-            <div key={event._id} className="event-card">
-              <div className="event-info">
+            <div 
+              key={event._id} 
+              className={styles['event-card']} 
+              onClick={() => handleCardClick(event._id)} 
+            >
+              <div className={styles['event-info']}>
                 <h2>{event.title}</h2>
                 <p>{event.category}</p>
-                <p>{formatDate(event.date)}</p> {/* Format the date here */}
+                <p>{formatDate(event.date)}</p>
               </div>
-              <div className="event-actions">
-                <button onClick={() => handleEdit(event._id)} className="edit-btn">
+              <div className={styles['event-actions']}>
+                <button onClick={(e) => { e.stopPropagation(); handleEdit(event._id); }} className={styles['edit-btn']}>
                   <FaEdit size={20} />
                 </button>
-                <button onClick={() => handleDelete(event._id)} className="delete-btn">
+                <button onClick={(e) => { e.stopPropagation(); handleDelete(event._id); }} className={styles['delete-btn']}>
                   <FaTrash size={20} />
                 </button>
               </div>

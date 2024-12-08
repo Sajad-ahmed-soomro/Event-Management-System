@@ -3,6 +3,8 @@ const connectDB = require('./config/db');
 const eventRoutes = require('./routes/eventRoutes');
 const managerRoutes = require('./routes/managerRoutes'); // Import manager routes
 const sponsorRoutes = require('./routes/sponsorRoutes'); // Import sponsor routes
+const eventManagerRoutes = require('./routes/managerRoutes');
+
 require('dotenv').config();
 const cors = require('cors');  // Import CORS package
 
@@ -19,6 +21,7 @@ app.use(express.json());  // Middleware to parse JSON requests
 app.use('/api/events', eventRoutes);  // Use eventRoutes for API requests
 app.use('/api/managers', managerRoutes);  // Use managerRoutes for manager-related API requests
 app.use('/api/sponsors', sponsorRoutes);
+app.use('/api/event-manager', eventManagerRoutes);
 
 // Server
 const PORT = process.env.PORT || 5000;

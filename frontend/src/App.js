@@ -13,6 +13,7 @@ import MyBookings from "./components/MyBookings.js";
 import EventDetails from "./components/EventDetails.js";
 import OurServices from "./components/OurServices.js";
 import AboutUs from "./components/AboutUs.js";
+import ContactUs from "./components/ContactUs.js";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
         <Route path="/event-details/:eventId" element={<EventDetails />} />
         <Route path="/our-services" element={<OurServices />} />
         <Route path="/about-us" element={<AboutUs />} />
+
+        <Route path="/contact" element={<ContactUs />} />
         {/* Add other routes   here */}
       </Routes>
     </Router>

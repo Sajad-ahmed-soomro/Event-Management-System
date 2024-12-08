@@ -33,7 +33,7 @@ const HomePage = () => {
             </a>
           </li>
           <li>
-            <a href="#contact">
+            <a href="/contact">
               <i className="fas fa-envelope"></i>Contact
             </a>
           </li>

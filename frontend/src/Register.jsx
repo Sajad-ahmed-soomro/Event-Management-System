@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Ensure routing is set up
-import {weblogo} from "./webProject_Logo.png";
+import weblogo from "./images/webProject_Logo.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
-    FaTachometerAlt,
-    FaCalendarAlt,
     FaUserCog,
-    FaCogs,
     FaBars,
     FaUsers,
     FaUserTie,
@@ -18,9 +15,14 @@ const AdminHome = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/admin/profile')
+        fetch('http://localhost:5000/api/admin/profile', {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization" : localStorage.getItem("token")
+            }
+        })
             .then(response => response.json())
-            .then(data => setAdminName(data.name))
+            .then(data => {setAdminName(data.name); console.log("this is data", data)})
             .catch(error => console.error('Error fetching admin data:', error));
 
         fetch('http://localhost:5000/api/event-status/getevents')
@@ -62,23 +64,23 @@ const AdminHome = () => {
                     <ul className="mt-4 space-y-4">
                         <li className="py-3 px-4 flex items-center hover:bg-gray-700 rounded-lg transition ease-in-out">
                             <FaUserTie className="mr-3 text-lg" />
-                            <Link to="/manage-managers">Manage Managers</Link>
+                            <Link to="/admin/manage-managers">Manage Managers</Link>
                         </li>
                         <li className="py-3 px-4 flex items-center hover:bg-gray-700 rounded-lg transition ease-in-out">
                             <FaUsers className="mr-3 text-lg" />
-                            <Link to="/manage-users">Manage Users</Link>
+                            <Link to="/admin/manage-users">Manage Users</Link>
                         </li>
                         <li className="py-3 px-4 flex items-center hover:bg-gray-700 rounded-lg transition ease-in-out">
                             <FaUserCog className="mr-3 text-lg" />
-                            <Link to="/manage-profile">Manage Profile</Link>
+                            <Link to="/admin/manage-profile">Manage Profile</Link>
                         </li>
                         <li className="py-3 px-4 flex items-center hover:bg-gray-700 rounded-lg transition ease-in-out">
                             <FaClipboardList className="mr-3 text-lg" />
-                            <Link to="/manage-events-status">Manage Events</Link>
+                            <Link to="/admin/manage-events-status">Manage Events</Link>
                         </li>
                         <li className="py-3 px-4 flex items-center hover:bg-gray-700 rounded-lg transition ease-in-out">
                             <FaChartBar className="mr-3 text-lg" />
-                            <Link to="/reports">Reports</Link>
+                            <Link to="/admin/reports">Reports</Link>
                         </li>
                     </ul>
                 </aside>

@@ -12,7 +12,7 @@ html {
 
 /* Sidebar Styles */
 .sidebar {
-  width: 60px; /* Collapsed width */
+  width: 200px; /* Collapsed width */
   height: 100vh;
   background: linear-gradient(
     135deg,
@@ -25,15 +25,15 @@ html {
   align-items: center;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
-  position: fixed; /* Fix sidebar position */
+  position: fixed;
   top: 0; /* Align with the top bar */
   left: 0; /* Align with the left edge */
   z-index: 1100; /* Ensure it's above the top bar */
 }
 
-.sidebar:hover {
+/* .sidebar:hover {
   width: 200px; /* Expanded width */
-}
+/* }  */
 
 .logo {
   text-align: center;
@@ -96,10 +96,10 @@ html {
   transition: margin-left 0.3s;
 }
 
-.sidebar:hover ~ .content {
+/* .sidebar:hover ~ .content {
   margin-left: 200px; /* Adjust for the expanded sidebar width */
-  width: calc(100% - 200px);
-}
+  /* width: calc(100% - 200px);
+} */
 /* Top Bar */
 .top-bar img {
   margin-left: 5%;
@@ -236,3 +236,39 @@ html {
   border-radius: 10px;
   background: linear-gradient(135deg, #b85ccc, #17a2b8);
 }
+
+.sidebar {
+  width: 250px;
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar .nav-links a span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sidebar.collapsed .nav-links a span {
+  display: none;
+}
+
+.toggle-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+

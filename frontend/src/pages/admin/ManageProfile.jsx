@@ -19,7 +19,12 @@ const AdminProfile = () => {
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/admin/profile');
+                const response = await fetch('http://localhost:5000/api/admin/profile', {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization" : localStorage.getItem("token")
+                    }
+                });
                 if (response.ok) {
                     const data = await response.json();
                     setAdmin({

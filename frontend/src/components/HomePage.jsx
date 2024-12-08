@@ -1,50 +1,62 @@
-// src/components/HomePage.js
-import React from "react";
-import "./HomeStyle.css"; // Include styles from your current styles.css
+import React, { useState } from "react";
+import "./HomeStyle.css"; // Includ styles from your current styles.css
 import Logo from "../images/webProject_Logo.png"; // Correctly import the logo
-import Login from "../Login"
 
 const HomePage = () => {
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarExpanded(!isSidebarExpanded);
+  };
+
   return (
     <div>
-      <div className="sidebar">
+      <div className={`sidebar ${isSidebarExpanded ? "expanded" : "collapsed"}`}>
         <div className="logo">
           <img src={Logo} alt="Logo" />
-          <h2>Events</h2>
+          {isSidebarExpanded && <h2>Events</h2>}
         </div>
         <ul className="nav-links">
           <li>
             <a href="#Home">
-              <i className="fas fa-home"></i>Home
+              <i className="fas fa-home"></i>
+              {isSidebarExpanded && <span>Home</span>}
             </a>
           </li>
           <li>
             <a href="#show-gallery">
-              <i className="fas fa-ticket-alt"></i>Our Events
+              <i className="fas fa-ticket-alt"></i>
+              {isSidebarExpanded && <span>Our Events</span>}
             </a>
           </li>
           <li>
             <a href="#book-event">
-              <i className="fas fa-tools"></i>Services
+              <i className="fas fa-tools"></i>
+              {isSidebarExpanded && <span>Services</span>}
             </a>
           </li>
           <li>
             <a href="#about-us">
-              <i className="fas fa-info-circle"></i>About Us
+              <i className="fas fa-info-circle"></i>
+              {isSidebarExpanded && <span>About Us</span>}
             </a>
           </li>
           <li>
             <a href="#contact">
-              <i className="fas fa-envelope"></i>Contact
+              <i className="fas fa-envelope"></i>
+              {isSidebarExpanded && <span>Contact</span>}
             </a>
           </li>
         </ul>
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isSidebarExpanded ? "<" : ">"}
+        </button>
       </div>
 
-      <main className="content">
+      <main className="content" style={{width: "calc(100vw - 280px)", float: "right"}}>
         <div className="top-bar" style={{ alignItems: "center" }}>
           <img
-            src={Logo} // Use the imported logo
+            src={Logo}
             alt="Logo"
             width="100px"
             height="100px"
